@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using ConsoleApp1.Common;
+using JKToolKit.Spectre.AutoCompletion.Completion;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -9,7 +10,7 @@ using Spectre.Console.Cli;
 
 namespace ConsoleApp1;
 
-public class Program
+public abstract class Program
 {
     public static async Task<int> Main(string[] args)
     {
@@ -34,7 +35,7 @@ public class Program
                 app.Configure(config =>
                 {
                     config.SetApplicationName("ConsoleApp1");
-
+                    
                     var modules = provider.GetServices<ICommandModule>();
                     foreach (var module in modules)
                     {
@@ -56,7 +57,7 @@ public class Program
             .SelectMany(a =>
             {
                 try { return a.GetTypes(); }
-                catch { return Array.Empty<Type>(); }
+                catch { return []; }
             })
             .Where(t => moduleType.IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract)
             .ToList();

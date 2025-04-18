@@ -1,10 +1,8 @@
-using Spectre.Console.Cli;
-
 namespace ConsoleApp1.Commands.Hello;
 
+using Spectre.Console.Cli;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-
 
 public class DwaSettings : CommandSettings
 {
